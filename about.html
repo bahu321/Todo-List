@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - To-Do List App</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-brand">📋 To-Do List App</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="add-task.html">Add Task</a></li>
+                <li><a href="tasks.html">All Tasks</a></li>
+                <li><a href="completed.html">Completed</a></li>
+                <li><a href="about.html" class="active">About</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container">
+        <header class="page-header">
+            <h1>About This Project</h1>
+            <p>Learn more about the To-Do List application and its development</p>
+        </header>
+
+        <!-- Project Overview -->
+        <div class="card">
+            <h2 style="color: #667eea; margin-bottom: 1.5rem;">📖 Project Overview</h2>
+            <p style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 1.5rem;">
+                This To-Do List application is a fully functional web-based task management system designed to help users organize their daily activities, set priorities, and track their progress. Built with modern web technologies, it provides a clean, intuitive interface that works seamlessly across all devices.
+            </p>
+            <p style="font-size: 1.1rem; line-height: 1.8;">
+                The application demonstrates core web development concepts including client-side data persistence, responsive design, and user interaction patterns. It serves as both a practical tool for productivity and a showcase of modern frontend development techniques.
+            </p>
+        </div>
+
+        <!-- Key Features -->
+        <div class="card">
+            <h2 style="color: #667eea; margin-bottom: 1.5rem;">✨ Key Features</h2>
+            <ul class="features-list">
+                <li>Multi-page application architecture with consistent navigation</li>
+                <li>Task creation with optional due dates and priority levels</li>
+                <li>Real-time task completion tracking with visual feedback</li>
+                <li>Local storage persistence for data retention between sessions</li>
+                <li>Comprehensive task filtering and organization capabilities</li>
+                <li>Statistics dashboard showing productivity metrics</li>
+                <li>Fully responsive design for all device sizes</li>
+                <li>Intuitive user interface with smooth animations and transitions</li>
+                <li>Form validation and user feedback mechanisms</li>
+                <li>Clean, modern aesthetic with gradient backgrounds and card-based layout</li>
+            </ul>
+        </div>
+
+        <!-- Technologies Used -->
+        <div class="card">
+            <h2 style="color: #667eea; margin-bottom: 1.5rem;">💻 Technologies Used</h2>
+            
+            <div style="margin-bottom: 2rem;">
+                <h3 style="margin-bottom: 1rem; color: #333;">Frontend Technologies</h3>
+                <div class="tech-list">
+                    <span class="tech-badge">HTML5</span>
+                    <span class="tech-badge">CSS3</span>
+                    <span class="tech-badge">JavaScript (ES6+)</span>
+                    <span class="tech-badge">Flexbox</span>
+                    <span class="tech-badge">CSS Grid</span>
+                    <span class="tech-badge">LocalStorage API</span>
+                </div>
+            </div>
+
+            <div style="margin-bottom: 2rem;">
+                <h3 style="margin-bottom: 1rem; color: #333;">Development Approach</h3>
+                <div class="tech-list">
+                    <span class="tech-badge">Vanilla JavaScript</span>
+                    <span class="tech-badge">No Frameworks</span>
+                    <span class="tech-badge">No External Libraries</span>
+                    <span class="tech-badge">Mobile-First Design</span>
+                    <span class="tech-badge">Progressive Enhancement</span>
+                </div>
+            </div>
+
+            <div>
+                <h3 style="margin-bottom: 1rem; color: #333;">Key Concepts Demonstrated</h3>
+                <div class="tech-list">
+                    <span class="tech-badge">DOM Manipulation</span>
+                    <span class="tech-badge">Event Handling</span>
+                    <span class="tech-badge">Object-Oriented Programming</span>
+                    <span class="tech-badge">Data Persistence</span>
+                    <span class="tech-badge">Responsive Web Design</span>
+                    <span class="tech-badge">User Experience Design</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Architecture -->
+        <div class="card">
+            <h2 style="color: #667eea; margin-bottom: 1.5rem;">🏗️ Application Architecture</h2>
+            
+            <div style="margin-bottom: 1.5rem;">
+                <h3 style="margin-bottom: 1rem; color: #333;">File Structure</h3>
+                <pre style="background: #f8f9fa; padding: 1.5rem; border-radius: 8px; overflow-x: auto; font-family: 'Courier New', monospace;">
+todo-site/
+├── index.html          (Home page)
+├── add-task.html       (Task creation page)
+├── tasks.html          (All tasks view)
+├── completed.html      (Completed tasks view)
+├── about.html          (Project information)
+├── styles.css          (Shared styling)
+└── script.js           (Shared JavaScript logic)
+                </pre>
+            </div>
+
+            <div>
+                <h3 style="margin-bottom: 1rem; color: #333;">Core Components</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;">
+                    <div style="padding: 1.5rem; background: #f8f9fa; border-radius: 8px;">
+                        <h4 style="color: #667eea; margin-bottom: 0.5rem;">TaskManager Class</h4>
+                        <p style="font-size: 0.9rem; color: #666;">
+                            Central class handling all task operations including creation, retrieval, updating, and deletion. Manages localStorage synchronization.
+                        </p>
+                    </div>
+                    <div style="padding: 1.5rem; background: #f8f9fa; border-radius: 8px;">
+                        <h4 style="color: #667eea; margin-bottom: 0.5rem;">Page Controllers</h4>
+                        <p style="font-size: 0.9rem; color: #666;">
+                            Page-specific initialization functions that handle DOM rendering and event binding for each application page.
+                        </p>
+                    </div>
+                    <div style="padding: 1.5rem; background: #f8f9fa; border-radius: 8px;">
+                        <h4 style="color: #667eea; margin-bottom: 0.5rem;">Utility Functions</h4>
+                        <p style="font-size: 0.9rem; color: #666;">
+                            Helper functions for DOM manipulation, user messaging, and common operations used across the application.
+                        </p>
+                    </div>
+                    <div style="padding: 1.5rem; background: #f8f9fa; border-radius: 8px;">
+                        <h4 style="color: #667eea; margin-bottom: 0.5rem;">CSS Architecture</h4>
+                        <p style="font-size: 0.9rem; color: #666;">
+                            Modular CSS with consistent design system, responsive breakpoints, and reusable component styles.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Data Structure -->
+        <div class="card">
+            <h2 style="color: #667eea; margin-bottom: 1.5rem;">📊 Data Structure</h2>
+            
+            <p style="margin-bottom: 1.5rem;">
+                Each task is represented as a JavaScript object with the following structure:
+            </p>
+            
+            <pre style="background: #f8f9fa; padding: 1.5rem; border-radius: 8px; overflow-x: auto; font-family: 'Courier New', monospace; font-size: 0.9rem;">
+{
+  id: Number,           // Unique identifier
+  text: String,         // Task description
+  completed: Boolean,   // Completion status
+  date: String,         // Due date (optional)
+  priority: String,     // Priority level (low/medium/high)
+  createdAt: String     // Creation timestamp
+}
+            </pre>
+            
+            <p style="margin-top: 1.5rem;">
+                Data is persisted using the browser's localStorage API, ensuring tasks remain available between browser sessions and page refreshes.
+            </p>
+        </div>
+
+        <!-- Development Process -->
+        <div class="card">
+            <h2 style="color: #667eea; margin-bottom: 1.5rem;">🛠️ Development Process</h2>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem;">
+                <div style="text-align: center; padding: 1.5rem;">
+                    <div style="font-size: 2.5rem; margin-bottom: 1rem;">🎨</div>
+                    <h3 style="margin-bottom: 1rem; color: #333;">Planning & Design</h3>
+                    <p style="font-size: 0.9rem; color: #666;">
+                        Defined requirements, created wireframes, and planned the application architecture and user flow.
+                    </p>
+                </div>
+                <div style="text-align: center; padding: 1.5rem;">
+                    <div style="font-size: 2.5rem; margin-bottom: 1rem;">💻</div>
+                    <h3 style="margin-bottom: 1rem; color: #333;">Implementation</h3>
+                    <p style="font-size: 0.9rem; color: #666;">
+                        Built core functionality using vanilla JavaScript, implemented responsive design, and created reusable components.
+                    </p>
+                </div>
+                <div style="text-align: center; padding: 1.5rem;">
+                    <div style="font-size: 2.5rem; margin-bottom: 1rem;">🧪</div>
+                    <h3 style="margin-bottom: 1rem; color: #333;">Testing & Refinement</h3>
+                    <p style="font-size: 0.9rem; color: #666;">
+                        Tested across devices and browsers, refined user experience, and optimized performance and accessibility.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Future Enhancements -->
+        <div class="card">
+            <h2 style="color: #667eea; margin-bottom: 1.5rem;">🚀 Future Enhancements</h2>
+            <ul class="features-list">
+                <li>Dark mode theme toggle</li>
+                <li>Task editing functionality</li>
+                <li>Task categories and tags</li>
+                <li>Search and filtering capabilities</li>
+                <li>Task reminders and notifications</li>
+                <li>Data export/import functionality</li>
+                <li>User authentication and accounts</li>
+                <li>Cloud synchronization</li>
+                <li>Advanced analytics and reporting</li>
+                <li>Keyboard shortcuts and accessibility improvements</li>
+            </ul>
+        </div>
+
+        <!-- Footer -->
+        <div class="card" style="text-align: center; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
+            <h2 style="margin-bottom: 1rem;">🎉 Thank You for Using This Application!</h2>
+            <p style="margin-bottom: 1.5rem; font-size: 1.1rem; opacity: 0.9;">
+                This project demonstrates the power of modern web development using only vanilla technologies. 
+                Feel free to explore the code and use it as a learning resource or starting point for your own projects.
+            </p>
+            <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
+                <a href="index.html" class="btn btn-primary" style="background: white; color: #667eea;">
+                    🏠 Return to Home
+                </a>
+                <a href="add-task.html" class="btn btn-secondary">
+                    ➕ Add Your First Task
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Tasks - To-Do List App</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-brand">📋 To-Do List App</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="add-task.html">Add Task</a></li>
+                <li><a href="tasks.html" class="active">All Tasks</a></li>
+                <li><a href="completed.html">Completed</a></li>
+                <li><a href="about.html">About</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container">
+        <header class="page-header">
+            <h1>All Tasks</h1>
+            <p>Manage and track all your tasks in one place</p>
+        </header>
+
+        <!-- Statistics -->
+        <div id="stats-container" class="stats-container">
+            <!-- Stats will be populated by JavaScript -->
+        </div>
+
+        <!-- Filter Options -->
+        <div class="card">
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+                <h2 style="margin: 0; color: #333;">Task List</h2>
+                <div style="display: flex; gap: 0.5rem;">
+                    <button id="filter-all" class="btn btn-primary active-filter" style="padding: 0.5rem 1rem;">
+                        All Tasks
+                    </button>
+                    <button id="filter-pending" class="btn btn-secondary" style="padding: 0.5rem 1rem;">
+                        Pending
+                    </button>
+                    <button id="filter-completed" class="btn btn-secondary" style="padding: 0.5rem 1rem;">
+                        Completed
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Task List -->
+        <div class="card">
+            <div class="task-list" id="task-list">
+                <!-- Tasks will be populated by JavaScript -->
+            </div>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="card">
+            <h2 style="margin-bottom: 1rem; color: #333;">Quick Actions</h2>
+            <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                <a href="add-task.html" class="btn btn-primary">
+                    ➕ Add New Task
+                </a>
+                <a href="completed.html" class="btn btn-success">
+                    ✅ View Completed Tasks
+                </a>
+                <button id="clear-all-completed" class="btn btn-warning">
+                    🗑️ Clear Completed Tasks
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // All tasks page specific functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Filter buttons functionality
+            const filterAllBtn = document.getElementById('filter-all');
+            const filterPendingBtn = document.getElementById('filter-pending');
+            const filterCompletedBtn = document.getElementById('filter-completed');
+            const clearCompletedBtn = document.getElementById('clear-all-completed');
+            
+            // Filter functions
+            function filterTasks(filterType) {
+                let tasks = [];
+                
+                switch(filterType) {
+                    case 'pending':
+                        tasks = taskManager.getPendingTasks();
+                        break;
+                    case 'completed':
+                        tasks = taskManager.getCompletedTasks();
+                        break;
+                    default: // all
+                        tasks = taskManager.getAllTasks();
+                }
+                
+                pages.renderTasks(tasks);
+            }
+            
+            // Update active filter button
+            function updateActiveFilter(activeBtn) {
+                [filterAllBtn, filterPendingBtn, filterCompletedBtn].forEach(btn => {
+                    btn.classList.remove('active-filter');
+                    btn.classList.add('btn-secondary');
+                });
+                activeBtn.classList.remove('btn-secondary');
+                activeBtn.classList.add('active-filter');
+            }
+            
+            // Event listeners for filter buttons
+            filterAllBtn.addEventListener('click', function() {
+                updateActiveFilter(this);
+                filterTasks('all');
+            });
+            
+            filterPendingBtn.addEventListener('click', function() {
+                updateActiveFilter(this);
+                filterTasks('pending');
+            });
+            
+            filterCompletedBtn.addEventListener('click', function() {
+                updateActiveFilter(this);
+                filterTasks('completed');
+            });
+            
+            // Clear completed tasks
+            clearCompletedBtn.addEventListener('click', function() {
+                const completedTasks = taskManager.getCompletedTasks();
+                
+                if (completedTasks.length === 0) {
+                    utils.showMessage('No completed tasks to clear', 'info');
+                    return;
+                }
+                
+                if (utils.confirm(`Are you sure you want to clear ${completedTasks.length} completed tasks?`)) {
+                    taskManager.clearCompletedTasks();
+                    utils.showMessage(`${completedTasks.length} completed tasks cleared`, 'success');
+                    
+                    // Refresh the current view
+                    const activeFilter = document.querySelector('.active-filter').id;
+                    if (activeFilter === 'filter-all') {
+                        filterTasks('all');
+                    } else if (activeFilter === 'filter-completed') {
+                        filterTasks('completed');
+                    }
+                    
+                    // Update stats
+                    pages.renderStats();
+                }
+            });
+            
+            // Add active filter styling
+            const style = document.createElement('style');
+            style.textContent = `
+                .active-filter {
+                    background: #28a745 !important;
+                    color: white !important;
+                }
+                
+                .priority-high {
+                    background: #dc3545;
+                    color: white;
+                    padding: 0.2rem 0.5rem;
+                    border-radius: 10px;
+                    font-size: 0.8rem;
+                    font-weight: 500;
+                }
+                
+                .priority-medium {
+                    background: #ffc107;
+                    color: #212529;
+                    padding: 0.2rem 0.5rem;
+                    border-radius: 10px;
+                    font-size: 0.8rem;
+                    font-weight: 500;
+                }
+                
+                .priority-low {
+                    background: #6c757d;
+                    color: white;
+                    padding: 0.2rem 0.5rem;
+                    border-radius: 10px;
+                    font-size: 0.8rem;
+                    font-weight: 500;
+                }
+            `;
+            document.head.appendChild(style);
+        });
+    </script>
+</body>
+</html>

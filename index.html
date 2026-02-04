@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List App - Home</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-brand">📋 To-Do List App</a>
+            <ul class="nav-links">
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="add-task.html">Add Task</a></li>
+                <li><a href="tasks.html">All Tasks</a></li>
+                <li><a href="completed.html">Completed</a></li>
+                <li><a href="about.html">About</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container">
+        <header class="page-header">
+            <h1>Organize Your Life</h1>
+            <p>A simple, elegant task management application to help you stay productive and achieve your goals</p>
+        </header>
+
+        <!-- Stats Overview -->
+        <div class="stats-container">
+            <div class="stat-card">
+                <div class="stat-number" id="total-tasks">0</div>
+                <div class="stat-label">Total Tasks</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="completed-tasks">0</div>
+                <div class="stat-label">Completed</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="pending-tasks">0</div>
+                <div class="stat-label">Pending</div>
+            </div>
+        </div>
+
+        <!-- Features Section -->
+        <div class="card">
+            <h2 style="text-align: center; margin-bottom: 2rem; color: #667eea;">✨ Key Features</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem;">
+                <div style="text-align: center; padding: 1.5rem;">
+                    <div style="font-size: 3rem; margin-bottom: 1rem;">📝</div>
+                    <h3 style="margin-bottom: 1rem; color: #333;">Easy Task Creation</h3>
+                    <p style="color: #666;">Quickly add tasks with optional due dates and priority levels</p>
+                </div>
+                <div style="text-align: center; padding: 1.5rem;">
+                    <div style="font-size: 3rem; margin-bottom: 1rem;">✅</div>
+                    <h3 style="margin-bottom: 1rem; color: #333;">Smart Organization</h3>
+                    <p style="color: #666;">Mark tasks as complete and track your progress with statistics</p>
+                </div>
+                <div style="text-align: center; padding: 1.5rem;">
+                    <div style="font-size: 3rem; margin-bottom: 1rem;">📱</div>
+                    <h3 style="margin-bottom: 1rem; color: #333;">Responsive Design</h3>
+                    <p style="color: #666;">Works seamlessly on desktop, tablet, and mobile devices</p>
+                </div>
+                <div style="text-align: center; padding: 1.5rem;">
+                    <div style="font-size: 3rem; margin-bottom: 1rem;">💾</div>
+                    <h3 style="margin-bottom: 1rem; color: #333;">Data Persistence</h3>
+                    <p style="color: #666;">Your tasks are saved automatically and persist between sessions</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Call to Action -->
+        <div class="card" style="text-align: center; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
+            <h2 style="margin-bottom: 1.5rem;">Ready to Get Started?</h2>
+            <p style="margin-bottom: 2rem; font-size: 1.1rem; opacity: 0.9;">Join thousands of users who have transformed their productivity</p>
+            <a href="add-task.html" class="btn btn-primary" style="font-size: 1.2rem; padding: 1rem 2rem;">
+                🚀 Get Started Now
+            </a>
+        </div>
+
+        <!-- Recent Tasks Preview -->
+        <div class="card">
+            <h2 style="margin-bottom: 1.5rem; color: #333;">Recent Tasks</h2>
+            <div id="recent-tasks">
+                <div class="empty-state">
+                    <div style="font-size: 3rem; margin-bottom: 1rem;">📭</div>
+                    <h3>No tasks yet</h3>
+                    <p>Start by adding your first task!</p>
+                    <a href="add-task.html" class="btn btn-primary" style="margin-top: 1rem;">Add Your First Task</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // Additional home page specific functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Show recent tasks (last 3 created)
+            const recentTasksContainer = document.getElementById('recent-tasks');
+            const allTasks = taskManager.getAllTasks();
+            
+            if (allTasks.length > 0) {
+                const recentTasks = allTasks.slice(-3).reverse(); // Get last 3 tasks, newest first
+                recentTasksContainer.innerHTML = '<div class="task-list"></div>';
+                
+                const taskList = recentTasksContainer.querySelector('.task-list');
+                recentTasks.forEach(task => {
+                    const taskElement = pages.createTaskElement(task);
+                    taskList.appendChild(taskElement);
+                });
+                
+                // Add link to see all tasks
+                const seeAllLink = document.createElement('div');
+                seeAllLink.style.textAlign = 'center';
+                seeAllLink.style.marginTop = '1.5rem';
+                seeAllLink.innerHTML = `
+                    <a href="tasks.html" class="btn btn-secondary">View All Tasks</a>
+                `;
+                recentTasksContainer.appendChild(seeAllLink);
+            }
+        });
+    </script>
+</body>
+</html>

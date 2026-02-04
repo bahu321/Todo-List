@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Task - To-Do List App</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-brand">📋 To-Do List App</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="add-task.html" class="active">Add Task</a></li>
+                <li><a href="tasks.html">All Tasks</a></li>
+                <li><a href="completed.html">Completed</a></li>
+                <li><a href="about.html">About</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container">
+        <header class="page-header">
+            <h1>Add New Task</h1>
+            <p>Create a new task to help organize your day</p>
+        </header>
+
+        <div class="card">
+            <form id="add-task-form">
+                <div class="form-group">
+                    <label for="task-input">Task Description *</label>
+                    <input 
+                        type="text" 
+                        id="task-input" 
+                        class="form-control" 
+                        placeholder="What needs to be done?"
+                        required
+                    >
+                    <div class="error-message" id="task-error" style="color: #dc3545; font-size: 0.9rem; margin-top: 0.5rem; display: none;">
+                        Task description cannot be empty
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="task-date">Due Date (Optional)</label>
+                    <input 
+                        type="date" 
+                        id="task-date" 
+                        class="form-control"
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="task-priority">Priority (Optional)</label>
+                    <select id="task-priority" class="form-control">
+                        <option value="low">Low Priority</option>
+                        <option value="medium" selected>Medium Priority</option>
+                        <option value="high">High Priority</option>
+                    </select>
+                </div>
+
+                <div style="display: flex; gap: 1rem; margin-top: 2rem;">
+                    <button type="submit" class="btn btn-primary" style="flex: 1;">
+                        ✅ Add Task
+                    </button>
+                    <a href="tasks.html" class="btn btn-secondary" style="flex: 1; text-align: center; padding-top: 0.8rem;">
+                        📋 View All Tasks
+                    </a>
+                </div>
+            </form>
+        </div>
+
+        <!-- Tips Section -->
+        <div class="card">
+            <h2 style="margin-bottom: 1rem; color: #333;">💡 Tips for Effective Task Management</h2>
+            <ul style="list-style: none; padding: 0;">
+                <li style="padding: 0.5rem 0; display: flex; align-items: flex-start;">
+                    <span style="color: #28a745; font-weight: bold; margin-right: 1rem;">✓</span>
+                    <span>Be specific with your task descriptions</span>
+                </li>
+                <li style="padding: 0.5rem 0; display: flex; align-items: flex-start;">
+                    <span style="color: #28a745; font-weight: bold; margin-right: 1rem;">✓</span>
+                    <span>Set realistic due dates to maintain motivation</span>
+                </li>
+                <li style="padding: 0.5rem 0; display: flex; align-items: flex-start;">
+                    <span style="color: #28a745; font-weight: bold; margin-right: 1rem;">✓</span>
+                    <span>Use priority levels to focus on important tasks</span>
+                </li>
+                <li style="padding: 0.5rem 0; display: flex; align-items: flex-start;">
+                    <span style="color: #28a745; font-weight: bold; margin-right: 1rem;">✓</span>
+                    <span>Break large tasks into smaller, manageable steps</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // Add task page specific functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('add-task-form');
+            const taskInput = document.getElementById('task-input');
+            const taskError = document.getElementById('task-error');
+
+            // Real-time validation
+            taskInput.addEventListener('input', function() {
+                if (this.value.trim()) {
+                    taskError.style.display = 'none';
+                    this.style.borderColor = '#e1e1e1';
+                }
+            });
+
+            // Form submission validation
+            form.addEventListener('submit', function(e) {
+                const taskText = taskInput.value.trim();
+                
+                if (!taskText) {
+                    e.preventDefault();
+                    taskError.style.display = 'block';
+                    taskInput.style.borderColor = '#dc3545';
+                    taskInput.focus();
+                    return;
+                }
+            });
+
+            // Set minimum date to today
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('task-date').min = today;
+        });
+    </script>
+</body>
+</html>

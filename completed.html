@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Completed Tasks - To-Do List App</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-brand">📋 To-Do List App</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="add-task.html">Add Task</a></li>
+                <li><a href="tasks.html">All Tasks</a></li>
+                <li><a href="completed.html" class="active">Completed</a></li>
+                <li><a href="about.html">About</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container">
+        <header class="page-header">
+            <h1>✅ Completed Tasks</h1>
+            <p>Celebrate your achievements and manage completed tasks</p>
+        </header>
+
+        <!-- Completion Stats -->
+        <div class="stats-container">
+            <div class="stat-card">
+                <div class="stat-number" id="completed-count">0</div>
+                <div class="stat-label">Tasks Completed</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="total-tasks-count">0</div>
+                <div class="stat-label">Total Tasks</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="completion-percentage">0%</div>
+                <div class="stat-label">Completion Rate</div>
+            </div>
+        </div>
+
+        <!-- Achievement Message -->
+        <div class="card" id="achievement-section" style="display: none;">
+            <div style="text-align: center; padding: 2rem;">
+                <div style="font-size: 4rem; margin-bottom: 1rem;">🎉</div>
+                <h2 style="color: #28a745; margin-bottom: 1rem;">Congratulations!</h2>
+                <p style="font-size: 1.2rem; color: #666; margin-bottom: 1.5rem;">
+                    You've completed all your tasks! Great job staying productive.
+                </p>
+                <a href="add-task.html" class="btn btn-primary">
+                    🚀 Add New Challenges
+                </a>
+            </div>
+        </div>
+
+        <!-- Completed Tasks List -->
+        <div class="card">
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.5rem;">
+                <h2 style="margin: 0; color: #333;">Your Completed Tasks</h2>
+                <button id="clear-completed" class="btn btn-warning">
+                    🗑️ Clear All Completed
+                </button>
+            </div>
+            
+            <div class="task-list" id="completed-task-list">
+                <!-- Completed tasks will be populated by JavaScript -->
+            </div>
+        </div>
+
+        <!-- Motivation Section -->
+        <div class="card">
+            <h2 style="margin-bottom: 1rem; color: #333;">💪 Keep Up the Great Work!</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+                <div style="text-align: center; padding: 1rem; background: #f8f9fa; border-radius: 8px;">
+                    <div style="font-size: 2rem; margin-bottom: 0.5rem;">🏆</div>
+                    <h3 style="margin-bottom: 0.5rem; color: #28a745;">Achievement Unlocked</h3>
+                    <p style="font-size: 0.9rem; color: #666;">Every completed task brings you closer to your goals</p>
+                </div>
+                <div style="text-align: center; padding: 1rem; background: #f8f9fa; border-radius: 8px;">
+                    <div style="font-size: 2rem; margin-bottom: 0.5rem;">📈</div>
+                    <h3 style="margin-bottom: 0.5rem; color: #17a2b8;">Track Progress</h3>
+                    <p style="font-size: 0.9rem; color: #666;">Monitor your completion rate and productivity</p>
+                </div>
+                <div style="text-align: center; padding: 1rem; background: #f8f9fa; border-radius: 8px;">
+                    <div style="font-size: 2rem; margin-bottom: 0.5rem;">⚡</div>
+                    <h3 style="margin-bottom: 0.5rem; color: #ffc107;">Stay Motivated</h3>
+                    <p style="font-size: 0.9rem; color: #666;">Small wins lead to big accomplishments</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Navigation -->
+        <div class="card">
+            <h2 style="margin-bottom: 1rem; color: #333;">Quick Navigation</h2>
+            <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                <a href="add-task.html" class="btn btn-primary">
+                    ➕ Add New Task
+                </a>
+                <a href="tasks.html" class="btn btn-secondary">
+                    📋 View All Tasks
+                </a>
+                <a href="index.html" class="btn btn-success">
+                    🏠 Back to Home
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // Completed tasks page specific functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Update completion statistics
+            function updateCompletionStats() {
+                const stats = taskManager.getStats();
+                const completedTasks = taskManager.getCompletedTasks();
+                
+                document.getElementById('completed-count').textContent = stats.completed;
+                document.getElementById('total-tasks-count').textContent = stats.total;
+                document.getElementById('completion-percentage').textContent = stats.completionRate + '%';
+                
+                // Show achievement message if all tasks are completed
+                const achievementSection = document.getElementById('achievement-section');
+                if (stats.total > 0 && stats.completed === stats.total) {
+                    achievementSection.style.display = 'block';
+                } else {
+                    achievementSection.style.display = 'none';
+                }
+            }
+            
+            // Initialize the page
+            updateCompletionStats();
+            
+            // Add celebration animation for achievement
+            const achievementSection = document.getElementById('achievement-section');
+            if (achievementSection.style.display === 'block') {
+                achievementSection.style.animation = 'pulse 2s infinite';
+                
+                // Add animation style
+                const style = document.createElement('style');
+                style.textContent = `
+                    @keyframes pulse {
+                        0% { transform: scale(1); }
+                        50% { transform: scale(1.02); }
+                        100% { transform: scale(1); }
+                    }
+                    .card:hover {
+                        animation: none;
+                    }
+                `;
+                document.head.appendChild(style);
+            }
+            
+            // Refresh stats when tasks are updated
+            const originalToggleTaskCompletion = taskManager.toggleTaskCompletion;
+            taskManager.toggleTaskCompletion = function(id) {
+                const result = originalToggleTaskCompletion.call(this, id);
+                updateCompletionStats();
+                return result;
+            };
+            
+            const originalDeleteTask = taskManager.deleteTask;
+            taskManager.deleteTask = function(id) {
+                const result = originalDeleteTask.call(this, id);
+                updateCompletionStats();
+                return result;
+            };
+        });
+    </script>
+</body>
+</html>
